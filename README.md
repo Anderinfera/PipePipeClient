@@ -1,4 +1,4 @@
-# PipePipe - Andercoded
+# PipePipe Andercoded
 
 A modified version of [PipePipe](https://github.com/InfinityLoop1308/PipePipe), the client of PipePipe by InfinityLoop1308. It is not an official build and is not supported by the PipePipe developers: please report problems with this version [here](https://github.com/Anderinfera/PipePipeClient/issues), not in the PipePipe repository.
 
@@ -22,7 +22,7 @@ GNU General Public License v3.0, like PipePipe: see [LICENSE](LICENSE).
 
 ---
 
-# PipePipe - Andercoded (PL)
+# PipePipe Andercoded (PL)
 
 Zmieniona wersja [PipePipe](https://github.com/InfinityLoop1308/PipePipe), klienta PipePipe autorstwa InfinityLoop1308. To nie jest oficjalna wersja i twórcy PipePipe jej nie wspierają: problemy z tą wersją zgłaszaj [tutaj](https://github.com/Anderinfera/PipePipeClient/issues), a nie w repozytorium PipePipe.
 

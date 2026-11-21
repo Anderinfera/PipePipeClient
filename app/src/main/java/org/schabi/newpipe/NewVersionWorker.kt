@@ -193,7 +193,7 @@ class NewVersionWorker(
         private val DEBUG = MainActivity.DEBUG
         private val TAG = NewVersionWorker::class.java.simpleName
         private val RELEASE_APK_ABIS = listOf("armeabi-v7a", "arm64-v8a", "x86_64", "x86")
-        /** Releases of PipePipe - Andercoded, not of upstream PipePipe: a different app id and signing key. */
+        /** Releases of PipePipe Andercoded, not of upstream PipePipe: a different app id and signing key. */
         private const val NEWPIPE_API_URL = "https://api.github.com/repos/Anderinfera/PipePipeClient/releases"
         private const val IS_MANUAL = "isManual"
 
