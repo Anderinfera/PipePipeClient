@@ -11,20 +11,24 @@ def keyStorePassword = System.getenv("KEY_STORE_PASSWORD")
 def signingKeyAlias = System.getenv("KEY_ALIAS")
 def signingKeyPassword = System.getenv("KEY_PASSWORD")
 def baseVersionCode = 1111
-def appVersionName = "5.6.0"
+def upstreamVersionName = "5.6.0"
+// Andercoded release on top of the upstream version: 1, 2, ... Reset to 1 after merging a new upstream version.
+def andercodedRelease = 1
+def appVersionName = "${upstreamVersionName}-ac${andercodedRelease}"
+def andercodedVersionCode = 1000 * baseVersionCode + 10 * andercodedRelease
 def abiCodes = ['armeabi-v7a': 1, 'x86': 2, 'x86_64': 3, 'arm64-v8a': 4]
 def stableBuildConfigVersionCode =
-        (100 * baseVersionCode) + abiCodes['armeabi-v7a']
+        andercodedVersionCode + abiCodes['armeabi-v7a']
 
 android {
     compileSdk 37
 
     defaultConfig {
-        applicationId "InfinityLoop1309.NewPipeEnhanced"
+        applicationId "dev.ander.pipepipe"
         minSdk 24
         //noinspection OldTargetApi,ExpiredTargetSdkVersion
         targetSdk 36
-        versionCode baseVersionCode
+        versionCode andercodedVersionCode
         versionName appVersionName
         multiDexEnabled true
 
@@ -66,7 +70,7 @@ android {
             if (true) {
                 // default values when branch name could not be determined or is master or dev
                 applicationIdSuffix ".debug"
-                resValue "string", "app_name", "PipePipe Debug"
+                resValue "string", "app_name", "PipePipe - Andercoded Debug"
             } else {
                 applicationIdSuffix ".debug." + normalizedWorkingBranch
                 resValue "string", "app_name", "PipePipe " + workingBranch
@@ -76,12 +80,15 @@ android {
         release {
             if (signingConfigs.findByName("release")) {
                 signingConfig signingConfigs.release
+            } else {
+                // Andercoded releases are signed with the debug key of the build machine.
+                signingConfig signingConfigs.debug
             }
             if (System.properties.containsKey('packageSuffix')) {
                 applicationIdSuffix System.getProperty('packageSuffix')
-                resValue "string", "app_name", "PipePipe " + System.getProperty('packageSuffix')
+                resValue "string", "app_name", "PipePipe - Andercoded " + System.getProperty('packageSuffix')
             } else {
-                resValue "string", "app_name", "PipePipe"
+                resValue "string", "app_name", "PipePipe - Andercoded"
             }
             minifyEnabled true
             shrinkResources false // disabled to fix F-Droid's reproducible build
@@ -150,13 +157,13 @@ androidComponents.onVariants(androidComponents.selector().all()) { variant ->
     variant.outputs.each { output ->
         def outputFileName = output.outputFileName.get()
         def abi = abiCodes.keySet().sort { -it.length() }.find { outputFileName.contains(it) }
-        def versionCode = 100 * baseVersionCode
+        def versionCode = andercodedVersionCode
         if (abi != null) {
             versionCode += abiCodes[abi]
         }
         output.versionCode.set(versionCode)
         output.outputFileName.set(
-                "PipePipe_${appVersionName}-${abi ?: 'universal'}-${variant.name}.apk")
+                "PipePipe-Andercoded_${appVersionName}-${abi ?: 'universal'}-${variant.name}.apk")
     }
 }
 

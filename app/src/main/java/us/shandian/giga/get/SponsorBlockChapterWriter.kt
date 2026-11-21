@@ -266,7 +266,7 @@ internal class SponsorBlockChapterWriter(
             return prefs.getBoolean(context.getString(R.string.sponsor_block_enable_key), true) &&
                 prefs.getBoolean(
                     context.getString(R.string.sponsor_block_download_chapters_key),
-                    false,
+                    true,
                 )
         }
 

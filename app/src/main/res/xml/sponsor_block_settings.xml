@@ -53,7 +53,7 @@
         <SwitchPreference
             app:iconSpaceReserved="false"
             android:dependency="@string/sponsor_block_enable_key"
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="@string/sponsor_block_download_chapters_key"
             android:summary="@string/sponsor_block_download_chapters_summary"
             android:title="@string/sponsor_block_download_chapters_title"/>
